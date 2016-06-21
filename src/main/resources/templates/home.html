@@ -13,7 +13,7 @@
 {{/user}}
 
 {{#user}}
-Messages by {{name}}:
+Messages by <b>{{name}}</b>:
 <form action="/logout" method="post" style="display: inline-block">
     <button type="submit">Logout</button>
 </form>
@@ -27,12 +27,18 @@ Messages by {{name}}:
 <ol>
     {{#messages}}
     <li>
-
-    <form action="/delete-message" method="post">
-            {{text}}
-            <input type="hidden" name="id" value="{{id}}"/>
-            <button type="submit">Delete</button>
+    <form action="edit-message" method="post">
+        <input type="hidden" name="id" value="{{id}}"/>
+        <input type="text" name="text" placeholder="Edit message">
+        <button type="submit">Edit</button>
     </form>
+    <form action="/delete-message" method="post">
+        {{text}}
+        <input type="hidden" name="id" value="{{id}}"/>
+
+        <button type="submit">Delete</button>
+    </form>
+
     </li>
     {{/messages}}
 </ol>
