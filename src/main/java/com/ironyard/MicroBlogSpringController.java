@@ -33,7 +33,10 @@ public class MicroBlogSpringController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(String username, HttpSession session) {
+    public String login(String username, HttpSession session) throws Exception {
+        if (username == null) {
+            throw new Exception("Didn't receive username");
+        }
         session.setAttribute("username", username);
         return "redirect:/";
     }
@@ -46,7 +49,7 @@ public class MicroBlogSpringController {
 
     @RequestMapping(path = "/add-message", method = RequestMethod.POST)
     public String add(String text, HttpSession session) {
-        Message message = new Message(messages.size() +1, text);
+        Message message = new Message(messages.size() + 1, text);
         messages.add(message);
         session.setAttribute("message", message);
         return "redirect:/";
